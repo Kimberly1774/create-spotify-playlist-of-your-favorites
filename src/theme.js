@@ -5,7 +5,6 @@ export default {
     colorPrimaryBg: "#fafafa",
     "--size-small": "40px",
     "fontFamily": "Roboto",
-    main: "palevioletred",
     sizeUnit: 4,
     sizeStep: 4,
     controlHeight: 38,

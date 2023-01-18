@@ -3,7 +3,6 @@ import './App.css';
 import DisplayPlaylists from "./Components/DisplayPlaylists/DisplayPlaylists";
 import { App as AntApp, ConfigProvider } from 'antd';
 import theme from "./theme";
-import GlobalStyle from "./globalStyles";
 import { ThemeProvider } from "styled-components";
 
 function App() {
@@ -70,7 +69,6 @@ function App() {
               ...theme,
             }}
           >
-            <GlobalStyle />
             <AntApp>
               {token && <DisplayPlaylists token={token} />}
             </AntApp>

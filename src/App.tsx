@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 import DisplayPlaylists from "./Components/DisplayPlaylists/DisplayPlaylists";
-import { App as AntApp, ConfigProvider } from 'antd';
+import { App as AntApp, Col, ConfigProvider, Row } from 'antd';
 import theme from "./theme";
 import { ThemeProvider } from "styled-components";
+import { Button } from "./Components/Button/Button";
 
 function App() {
   const CLIENT_ID = ""
   const REDIRECT_URI = ""
   const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
   const RESPONSE_TYPE = "token"
+  const REFRESH_TOKEN = ""
+  const CLIENT_SECRET = ""
 
   const [token, setToken] = useState<string>();
 
@@ -41,9 +44,9 @@ function App() {
       method: 'POST',
       body: new URLSearchParams({
         'client_id': CLIENT_ID,
-        'client_secret': '',
-        'grant_type': '',
-        'refresh_token': '',
+        'client_secret': CLIENT_SECRET,
+        'grant_type': 'refresh_token',
+        'refresh_token': REFRESH_TOKEN,
         'redirect_uri': REDIRECT_URI
       })
     }).then((response) => {
@@ -60,7 +63,16 @@ function App() {
           <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
             Login to Spotify
           </a>
-          : <div><button onClick={logout}>Logout</button><button onClick={() => o()}>o</button></div>}
+          : (
+            <Row justify="end" gutter={8}>
+              <Col>
+                <Button type="default" onClick={logout}>Logout</Button>
+              </Col>
+              <Col>
+                <Button type="default" onClick={() => o()}>Refresh Token</Button>
+              </Col>
+            </Row>
+          )}
       </div>
       <div>
         <ThemeProvider theme={theme}>

@@ -102,53 +102,70 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
   return (
     <StyledCreatePlaylist>
       <Wrapper>
-        <Row align="middle" gutter={[16, 16]}>
-          <Col flex="none">
-            <Typography.Title
-              level={3}
-              style={{ margin: 0 }}
-            >Create a playlist with</Typography.Title>
-          </Col>
-          <Col flex="none">
-            <InputNumber
-              size="large"
-              min={1}
-              max={50}
-              value={newPlaylistLength}
-              onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
-              bordered={false}
-            />
-          </Col>
-          <Col flex="auto">
-            <Typography.Title
-              style={{ margin: 0 }}
-              level={3}
-            >songs of your top 50 tracks in the last</Typography.Title>
-          </Col>
+        <Row align="middle" gutter={[0, 16]}>
+          <Row align="middle" gutter={[16, 0]}>
+            <Col>
+              <Typography.Title
+                style={{ margin: 0 }}
+                level={3}
+              >Create a randomized playlist of your favorites</Typography.Title>
+            </Col>
+
+            <Col flex="none">
+              <Typography.Title
+                level={3}
+                style={{ margin: 0 }}
+              >
+                based on the last
+              </Typography.Title>
+            </Col>
+          </Row>
+
           <Col span={24}>
-            <Select
-              size="large"
-              style={{ width: '300px' }}
-              options={options}
-              value={timeRange}
-              onChange={(value: string) => setTimeRange(value)}
-            />
-          </Col>
-          <Col span={24}>
-            <Button onClick={() => createNewPlaylistTopSongs()}>GO</Button>
-          </Col>
+              <Select
+                size="large"
+                style={{ width: '300px' }}
+                options={options}
+                value={timeRange}
+                onChange={(value: string) => setTimeRange(value)}
+              />
+            </Col>
+          <Row align="middle" gutter={[16, 42]}>
+            <Col>
+              <InputNumber
+                size="large"
+                min={1}
+                max={50}
+                value={newCustomPlaylistLength}
+                onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
+              />
+            </Col>
+            <Col>
+              <Typography.Title
+                level={3}
+                style={{ margin: 0 }}
+              >
+                songs
+              </Typography.Title>
+            </Col>
+            <Col span={24}>
+              <Button onClick={() => createNewPlaylistTopSongs()}>GO</Button>
+            </Col>
+          </Row>
+
+
         </Row>
       </Wrapper>
 
       <Wrapper>
-        <Row gutter={[16, 16]}>
+        <Row gutter={[0, 16]}>
           <Col span={24}>
             <Row align="middle" gutter={[16, 0]}>
               <Col>
                 <Typography.Title
                   style={{ margin: 0 }}
                   level={3}
-                >Create a playlist with</Typography.Title>
+                >Create a playlist</Typography.Title>
               </Col>
               <Col>
                 <InputNumber
@@ -157,7 +174,6 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
                   max={50}
                   value={newCustomPlaylistLength}
                   onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
-                  bordered={false}
                 />
               </Col>
               <Col>

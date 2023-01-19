@@ -1,6 +1,7 @@
 ## Your new favorite playlist
 
 ### This application creates playlists based on your favorite tracks.
+### The playlists are added to your spotify app so you can start listening to your new playlist right away
 
 ![Alt text](/src/images/spotify.png?raw=true "Optional Title")
 
@@ -36,4 +37,4 @@
 
 #### If you want to work with this repo you have to use the spotify authorization guide https://developer.spotify.com/documentation/general/guides/authorization/
 
-
+#### You'll have to generate a client_id and other keys and add them to App.tsx

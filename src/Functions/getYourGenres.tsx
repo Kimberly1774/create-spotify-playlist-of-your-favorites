@@ -22,7 +22,7 @@ export async function getYourGenres(token: string, timeRange: string) {
     }
   }).then((response) => response.json())
     .then((data) => {
-      const genresFromArtists = data?.items?.map((artist: Artist) => { return artist.genres; }).flatMap((genre: string) => genre) as string[];
+      const genresFromArtists = data?.items?.map((artist: Artist) => { return artist.genres; }).flatMap((genre: string) => genre) as string[] || [];
 
       const counts: { [key: string]: number; } = {};
       for (const num of genresFromArtists) {

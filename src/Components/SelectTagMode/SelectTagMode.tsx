@@ -21,7 +21,7 @@ interface Props {
 
 const tagRender = (props: CustomTagProps, options: SelectOptionType[]) => {
   const { label, value, closable, onClose } = props;
-  const myGenre = options.find((gen) => gen.value === value);
+  const option = options.find((gen) => gen.value === value);
   const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     event.stopPropagation();
@@ -42,7 +42,7 @@ const tagRender = (props: CustomTagProps, options: SelectOptionType[]) => {
       closable={closable}
       onClose={onClose}
     >
-      {myGenre?.image && <Avatar size={24} src={myGenre?.image} />}
+      {option?.image && <Avatar size={24} src={option?.image} />}
       {label}
     </Tag>
   );

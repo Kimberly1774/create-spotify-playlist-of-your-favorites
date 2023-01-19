@@ -17,12 +17,12 @@ interface CreatePlaylistProps {
 }
 
 const Wrapper = styled.div`
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
   background: #fafafa;
   gap: ${props => props.theme.spacing.m};
-  margin: auto;
   justify-content: center;
-  margin: 24px 20px 48px 20px;
-  min-width: 400px;
   padding: ${props => props.theme.spacing.m};
   ${props => props.theme.shadow.light};
 `;
@@ -39,7 +39,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
   const [timeRange, setTimeRange] = useState<string>('medium_term');
   const [customTimeRange, setCustomTimeRange] = useState<string>('medium_term');
 
-  function returnValuesNItems(arr: SelectOptionType[], count = 3) {
+  function returnValuesNItems(arr: SelectOptionType[], count = 1) {
     const shortArr = arr.splice(0, count);
     return shortArr.map(gen => gen.value);
   }
@@ -51,11 +51,11 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
     });
     await getYourTopArtists(token, customTimeRange).then((artists) => {
       setArtists(artists);
-      setSelectedArtists(artists?.slice(0, 3));
+      setSelectedArtists(artists?.slice(0, 2));
     });
     await getYourTracks(token, customTimeRange).then((tracks) => {
       setYourTracks(tracks);
-      setSelectedTrack(tracks?.slice(0, 3));
+      setSelectedTrack(tracks?.slice(0, 2));
     });
   }
 
@@ -101,125 +101,135 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
 
   return (
     <StyledCreatePlaylist>
-      <Wrapper>
+      <Wrapper style={{ flexGrow: 6 }}>
         <Row align="middle" gutter={[0, 16]}>
-          <Row align="middle" gutter={[16, 0]}>
-            <Col>
-              <Typography.Title
-                style={{ margin: 0 }}
-                level={3}
-              >Create a randomized playlist of your favorites</Typography.Title>
-            </Col>
-
-            <Col flex="none">
-              <Typography.Title
-                level={3}
-                style={{ margin: 0 }}
-              >
-                based on the last
-              </Typography.Title>
-            </Col>
-          </Row>
-
-          <Col span={24}>
-              <Select
-                size="large"
-                style={{ width: '300px' }}
-                options={options}
-                value={timeRange}
-                onChange={(value: string) => setTimeRange(value)}
-              />
-            </Col>
-          <Row align="middle" gutter={[16, 42]}>
-            <Col>
-              <InputNumber
-                size="large"
-                min={1}
-                max={50}
-                value={newPlaylistLength}
-                onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
-              />
-            </Col>
-            <Col>
-              <Typography.Title
-                level={3}
-                style={{ margin: 0 }}
-              >
-                songs
-              </Typography.Title>
-            </Col>
-            <Col span={24}>
-              <Button onClick={() => createNewPlaylistTopSongs()}>GO</Button>
-            </Col>
-          </Row>
-
-
-        </Row>
-      </Wrapper>
-
-      <Wrapper>
-        <Row gutter={[0, 16]} style={{ minWidth: '600px'}}>
-          <Col span={24}>
-            <Row align="middle" gutter={[16, 0]}>
-              <Col>
-                <Typography.Title
-                  style={{ margin: 0 }}
-                  level={3}
-                >Create a playlist</Typography.Title>
-              </Col>
-              <Col>
-                <InputNumber
-                  size="large"
-                  min={1}
-                  max={50}
-                  value={newCustomPlaylistLength}
-                  onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
-                />
-              </Col>
-              <Col>
-                <Typography.Title
-                  style={{ margin: 0 }}
-                  level={3}
-                >
-                  songs based on your favorites for
-                </Typography.Title>
-              </Col>
-              <Col>
-                <Select
-                  size="large"
-                  style={{ width: '180px' }}
-                  options={options}
-                  value={customTimeRange}
-                  onChange={(value: string) => setCustomTimeRange(value)}
-                />
-              </Col>
-            </Row>
+          <Col>
+            <Typography.Title
+              style={{ margin: '12px 0' }}
+              level={2}
+            >New playlist based on your favorites</Typography.Title>
           </Col>
-          <Col span={24}>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col>
+            <InputNumber
+              size="large"
+              min={1}
+              max={50}
+              value={newCustomPlaylistLength}
+              onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
+            />
+          </Col>
+          <Col>
+            <Typography.Title
+              style={{ margin: '12px 0' }}
+              level={5}
+            >
+              songs
+            </Typography.Title>
+          </Col>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col>
+            <Typography.Title
+              style={{ margin: 0 }}
+              level={5}
+            >
+              based on the last
+            </Typography.Title>
+          </Col>
+          <Col>
+            <Select
+              size="large"
+              style={{ width: '180px' }}
+              options={options}
+              value={customTimeRange}
+              onChange={(value: string) => setCustomTimeRange(value)}
+            />
+          </Col>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col flex="100%">
             <SelectTagMode
               options={artists}
               values={selectedArtists}
               handleChange={(value: any) => setSelectedArtists(value)}
             />
           </Col>
-          <Col span={24}>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col flex="100%">
             <SelectTagMode
               options={yourTracks}
               values={selectedTrack}
               handleChange={(value: any) => setSelectedTrack(value)}
             />
           </Col>
-          <Col span={24}>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col flex="100%">
             <SelectTagMode
               options={yourGenres}
               values={selectedYourGenre}
               handleChange={(value: any) => setSelectedYourGenre(value)}
             />
           </Col>
-          <Col span={12}>
-            <Button onClick={() => createNewCustomizedPlaylist()}>GO</Button>
+        </Row>
+        <Row>
+          <Button onClick={() => createNewCustomizedPlaylist()}>GO</Button>
+        </Row>
+      </Wrapper>
+
+      <Wrapper style={{ flexGrow: 1 }}>
+        <Row align="middle" gutter={[0, 16]}>
+          <Col>
+            <Typography.Title
+              style={{ margin: '12px 0' }}
+              level={2}
+            >New playlist of your favorite songs</Typography.Title>
           </Col>
         </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col flex="100px">
+            <InputNumber
+              size="large"
+              min={1}
+              max={50}
+              value={newPlaylistLength}
+              onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
+            />
+          </Col>
+          <Col flex="auto">
+            <Typography.Title
+              level={5}
+              style={{ margin: 0 }}
+            >
+              random songs of your top 50
+            </Typography.Title>
+          </Col>
+        </Row>
+        <Row align="middle" gutter={[16, 16]}>
+          <Col>
+            <Typography.Title
+              level={5}
+              style={{ margin: 0 }}
+            >
+              based on the last
+            </Typography.Title>
+          </Col>
+          <Col>
+            <Select
+              size="large"
+              style={{ width: '180px' }}
+              options={options}
+              value={timeRange}
+              onChange={(value: string) => setTimeRange(value)}
+            />
+          </Col>
+        </Row>
+        <Col span={24}>
+          <Button onClick={() => createNewPlaylistTopSongs()}>GO</Button>
+        </Col>
       </Wrapper>
     </StyledCreatePlaylist>
   );

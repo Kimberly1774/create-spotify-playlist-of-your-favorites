@@ -37,7 +37,7 @@ const DisplayPlaylists = ({ token }: DisplayPlaylistProps) => {
       {
         <List
           grid={{
-            gutter: 8,
+            gutter: 36,
             xs: 1,
             sm: 2,
             md: 2,

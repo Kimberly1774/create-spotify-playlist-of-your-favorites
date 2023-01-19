@@ -11,4 +11,7 @@ export const StyledPlaylist = styled.div`
   .ant-list-item {
     padding: ${props => props.theme.spacing.xxs} 0;
   }
+  .ant-list-item .ant-list-item-no-flex {
+    padding: 0;
+  }
 `;

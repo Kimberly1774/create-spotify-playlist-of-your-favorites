@@ -7,6 +7,6 @@ export const options = [{
   value: 'medium_term'
 },
 {
-  label: 'years',
+  label: 'few years',
   value: 'long_term'
 }];

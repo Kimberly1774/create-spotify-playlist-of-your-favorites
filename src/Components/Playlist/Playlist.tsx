@@ -84,7 +84,7 @@ export const Playlist = ({ id = "", token, getTrack, getPlaylist }: PlaylistProp
 
   return (
     <StyledPlaylist>
-      <Card style={{ width: 360 }}>
+      <Card>
         <Meta
           title={playlist?.name || 'Playlist Title'}
           avatar={<Avatar

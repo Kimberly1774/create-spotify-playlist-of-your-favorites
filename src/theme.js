@@ -39,7 +39,7 @@ export default {
     s: '16px',
     m: '20px',
     l: '28px',
-    xl: '56px',
+    xl: '48px',
   },
   shadow: {
     light: 'box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;',

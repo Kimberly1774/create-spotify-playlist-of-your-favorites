@@ -172,8 +172,8 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
                   size="large"
                   min={1}
                   max={50}
-                  value={newCustomPlaylistLength}
-                  onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
+                  value={newPlaylistLength}
+                  onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
                 />
               </Col>
               <Col>

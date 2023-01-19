@@ -1,7 +1,6 @@
-# Your new favorite playlist
+## Your new favorite playlist
 
-
-## This application allows you to create playlists based on your favorite tracks.
+### This application creates playlists based on your favorite tracks.
 
 ![Alt text](/src/images/spotify.png?raw=true "Optional Title")
 
@@ -9,7 +8,6 @@
 <br />
 
 ### You can create a playlist with a randomized selection of your top tracks.
-
 #### Choose between your favorite songs of the last 4 weeks, 6 months or even a few years.
 
 ![Alt text](/src/images/favoritesDropdown.png?raw=true "Optional Title")

@@ -13,7 +13,7 @@ import { options } from "./timeRangeOptions";
 
 interface CreatePlaylistProps {
   token: string;
-  updatePlaylistData: Function;
+  updatePlaylistData: () => void;
 }
 
 const Wrapper = styled.div`
@@ -199,7 +199,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
             <SelectTagMode
               options={artists}
               values={selectedArtists}
-              handleChange={setSelectedArtists}
+              handleChange={(value: any) => setSelectedArtists(value)}
             />
           </Col>
           <Col span={24}>

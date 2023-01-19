@@ -11,8 +11,8 @@ const { Paragraph } = Typography;
 interface PlaylistProps {
   id?: string;
   token: string;
-  getTrack: Function;
-  getPlaylist: Function
+  getTrack: (id: string, token: string) => Promise<Track[]>;
+  getPlaylist: (id: string, token: string) => Promise<PlaylistType>;
 }
 
 export const Playlist = ({ id = "", token, getTrack, getPlaylist }: PlaylistProps) => {

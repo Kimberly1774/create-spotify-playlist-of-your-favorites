@@ -2,7 +2,7 @@ import React from 'react';
 import { ConfigProvider } from 'antd';
 import theme from '../../theme';
 import { Playlist } from './Playlist';
-import { getTrackDataMock, getPlaylistDataMock } from './Playlist.mock';
+// import { getTrackDataMock, getPlaylistDataMock } from './Playlist.mock';
 
 export default {
   title: 'Playlist',
@@ -16,11 +16,11 @@ const Template = () => {
         ...theme,
       }}
     >
-    <Playlist
-      getTrack={getTrackDataMock}
+    {/*<Playlist
+      getTrack={() => getTrackDataMock()}
       getPlaylist={getPlaylistDataMock}
       token=""
-    />
+    />*/}
   </ConfigProvider>
 )};
 

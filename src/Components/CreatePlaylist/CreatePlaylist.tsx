@@ -136,8 +136,8 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
                 size="large"
                 min={1}
                 max={50}
-                value={newCustomPlaylistLength}
-                onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
+                value={newPlaylistLength}
+                onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
               />
             </Col>
             <Col>
@@ -158,7 +158,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
       </Wrapper>
 
       <Wrapper>
-        <Row gutter={[0, 16]}>
+        <Row gutter={[0, 16]} style={{ minWidth: '600px'}}>
           <Col span={24}>
             <Row align="middle" gutter={[16, 0]}>
               <Col>
@@ -172,8 +172,8 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
                   size="large"
                   min={1}
                   max={50}
-                  value={newPlaylistLength}
-                  onChange={(e) => { typeof e === 'number' && setNewPlaylistsLength(e) }}
+                  value={newCustomPlaylistLength}
+                  onChange={(e) => { typeof e === 'number' && setNewCustomPlaylistsLength(e) }}
                 />
               </Col>
               <Col>

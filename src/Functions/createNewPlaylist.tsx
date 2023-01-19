@@ -31,7 +31,7 @@ export async function createNewPlaylist(token: string, newPlaylistLength = 5, ti
           'Authorization': 'Bearer ' + token,
         },
         body: JSON.stringify({
-          'name': 'My Faves' + newPlaylistLength + ' - ' + selectedGenreSeed,
+          'name': 'My Faves' + ' - ' + selectedGenreSeed,
           'description': descriptionStringified,
           'collaborative': false,
           'public': false

@@ -171,7 +171,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
             <SelectTagMode
               options={yourGenres}
               values={selectedYourGenre}
-              handleChange={(value: any) => setSelectedYourGenre(value)}
+              handleChange={setSelectedYourGenre}
             />
           </Col>
         </Row>

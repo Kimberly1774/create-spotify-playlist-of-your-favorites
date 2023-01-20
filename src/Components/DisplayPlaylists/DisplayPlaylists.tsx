@@ -16,7 +16,7 @@ const DisplayPlaylists = ({ token }: DisplayPlaylistProps) => {
     getPlaylists();
   }, []);
 
-  const getPlaylists = () => {
+  function getPlaylists () {
     fetch('https://api.spotify.com/v1/users/1131858986/playlists?limit=15&offset=0', {
       headers: {
         'Accept': 'application/json',
@@ -29,11 +29,11 @@ const DisplayPlaylists = ({ token }: DisplayPlaylistProps) => {
         const filteredPlaylists = data.items?.filter((play: PlaylistType) => play.name.includes('My Faves'));
         setPlaylists(filteredPlaylists);
       })
-  };
+  }
 
   return (
     <StyledDisplayPlaylist>
-      <CreatePlaylist token={token} updatePlaylistData={() => getPlaylists()} />
+      <CreatePlaylist token={token} updatePlaylistData={getPlaylists} />
       {
         <List
           grid={{

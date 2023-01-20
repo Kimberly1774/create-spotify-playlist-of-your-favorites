@@ -1,5 +1,6 @@
 async function stringify(str: object) {
-  return await JSON.stringify(str);
+  const stringified = await JSON.stringify(str);
+  return stringified;
 }
 
 /**

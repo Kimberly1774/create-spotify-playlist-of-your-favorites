@@ -10,7 +10,7 @@ import { Track } from "spotify-types";
 export function clearPlaylist (playlistId: string, tracks: Track[], token: string) {
   const uriTracks = tracks?.map(track => track.uri).join();
   let tracksForBody = "{\"tracks\":[";
-  tracks.map((track) => tracksForBody += `{"uri":"${track.uri}"},`);
+  tracks.forEach((track) => tracksForBody += `{"uri":"${track.uri}"},`);
   tracksForBody = tracksForBody.substring(0, tracksForBody.length - 1);
   tracksForBody += `]}`;
 

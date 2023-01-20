@@ -30,16 +30,16 @@ function App() {
     if (token) {
       setToken(token);
     } else {
-      o();
+      refreshToken();
     }
   }, [])
 
-  const logout = () => {
+  function logout () {
     setToken("");
     window.localStorage.removeItem("token");
   }
 
-  async function o() {
+  async function refreshToken() {
     const r = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       body: new URLSearchParams({
@@ -69,7 +69,7 @@ function App() {
                 <Button type="default" onClick={logout}>Logout</Button>
               </Col>
               <Col>
-                <Button type="default" onClick={() => o()}>Refresh Token</Button>
+                <Button type="default" onClick={refreshToken}>Refresh Token</Button>
               </Col>
             </Row>
           )}

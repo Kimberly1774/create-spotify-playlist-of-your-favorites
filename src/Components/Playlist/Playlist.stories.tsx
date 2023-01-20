@@ -2,7 +2,6 @@ import React from 'react';
 import { ConfigProvider } from 'antd';
 import theme from '../../theme';
 import { Playlist } from './Playlist';
-// import { getTrackDataMock, getPlaylistDataMock } from './Playlist.mock';
 
 export default {
   title: 'Playlist',

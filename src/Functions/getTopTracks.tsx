@@ -23,7 +23,7 @@ export async function getTopTracks(token: string, trackCount = 5, timeRange = 'm
   })
   .then((response) => response.json())
   .then((data) => {
-    const randomizedTracksFromData = data.items.filter((item: Track, index: number) => randomizeTopTracks.includes(index));
+    const randomizedTracksFromData = data.items?.filter((item: Track, index: number) => randomizeTopTracks.includes(index));
 
     return (randomizedTracksFromData);
   }).catch((err) => {

@@ -6,10 +6,14 @@ export default {
   component: SelectTagMode
 };
 
+function handleChange() {
+  console.log('select tag')
+}
+
 const Template = () => (
   <SelectTagMode
     options={[{ value: 'indie', label: 'Indie' }, { value: 'pop', label: 'Pop' }, { value: 'rock', label: 'Rock' }]}
-    handleChange={() => console.log('select tag')}
+    handleChange={handleChange}
   />
 );
 

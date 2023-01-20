@@ -22,10 +22,10 @@ interface Props {
 const tagRender = (props: CustomTagProps, options: SelectOptionType[]) => {
   const { label, value, closable, onClose } = props;
   const option = options.find((gen) => gen.value === value);
-  const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+  function onPreventMouseDown (event: React.MouseEvent<HTMLSpanElement>) {
     event.preventDefault();
     event.stopPropagation();
-  };
+  }
 
   return (
     <Tag

@@ -69,7 +69,6 @@ export const Playlist = ({ id = "", token, getTrack, getPlaylist }: PlaylistProp
       addToPlaylist(id, result, token).then(() => updatePlaylist());
       setTracks(result);
     })
-    return;
   }
 
   if (!playlist) {
@@ -122,8 +121,8 @@ export const Playlist = ({ id = "", token, getTrack, getPlaylist }: PlaylistProp
           )}>
         </List>
         {tracks?.length === 0
-          ? <Button onClick={() => addSongs()}>Add Songs</Button>
-          : <Button type="default" onClick={() => switchSongs()}>Switch Songs</Button>}
+          ? <Button onClick={addSongs}>Add Songs</Button>
+          : <Button type="default" onClick={switchSongs}>Switch Songs</Button>}
       </Card>
     </StyledPlaylist>
   );

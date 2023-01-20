@@ -90,7 +90,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
   }
 
   async function createNewPlaylistTopSongs() {
-    createNewPlaylist(token, newPlaylistLength, 'top').then(playlistId => {
+    createNewPlaylist(token, newPlaylistLength, timeRange).then(playlistId => {
       getTopTracks(token, newPlaylistLength, timeRange).then((tracks) => {
         addToPlaylist(playlistId, tracks, token);
       }).then(() => {
@@ -144,7 +144,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
               style={{ width: '180px' }}
               options={options}
               value={customTimeRange}
-              onChange={(value: string) => setCustomTimeRange(value)}
+              onChange={setCustomTimeRange}
             />
           </Col>
         </Row>
@@ -153,7 +153,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
             <SelectTagMode
               options={artists}
               values={selectedArtists}
-              handleChange={(value: any) => setSelectedArtists(value)}
+              handleChange={setSelectedArtists}
             />
           </Col>
         </Row>
@@ -162,7 +162,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
             <SelectTagMode
               options={yourTracks}
               values={selectedTrack}
-              handleChange={(value: any) => setSelectedTrack(value)}
+              handleChange={setSelectedTrack}
             />
           </Col>
         </Row>
@@ -176,7 +176,7 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
           </Col>
         </Row>
         <Row>
-          <Button onClick={() => createNewCustomizedPlaylist()}>GO</Button>
+          <Button onClick={createNewCustomizedPlaylist}>GO</Button>
         </Row>
       </Wrapper>
 
@@ -223,12 +223,12 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
               style={{ width: '180px' }}
               options={options}
               value={timeRange}
-              onChange={(value: string) => setTimeRange(value)}
+              onChange={setTimeRange}
             />
           </Col>
         </Row>
         <Col span={24}>
-          <Button onClick={() => createNewPlaylistTopSongs()}>GO</Button>
+          <Button onClick={createNewPlaylistTopSongs}>GO</Button>
         </Col>
       </Wrapper>
     </StyledCreatePlaylist>

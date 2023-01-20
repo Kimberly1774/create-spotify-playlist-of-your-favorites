@@ -6,8 +6,12 @@ export default {
   component: CreatePlaylist,
 };
 
+function updatePlaylistData() {
+  console.log('update');
+}
+
 const Template = () => (
-  <CreatePlaylist token="" updatePlaylistData={() => console.log("update playlist")} />
+  <CreatePlaylist token="" updatePlaylistData={updatePlaylistData} />
 );
 
 export const FirstStory = Template.bind({});

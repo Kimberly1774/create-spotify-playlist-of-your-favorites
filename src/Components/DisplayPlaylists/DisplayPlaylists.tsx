@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Playlist as PlaylistType } from "spotify-types";
 import { List } from 'antd';
-import { getPlaylist, getTrack } from '../../Functions';
+import { getPlaylist, getPlaylists, getTrack } from '../../Functions';
 import { CreatePlaylist, Playlist } from '..';
 import { StyledDisplayPlaylist } from './StyledDisplayPlaylist';
 
@@ -13,27 +13,16 @@ const DisplayPlaylists = ({ token }: DisplayPlaylistProps) => {
   const [playlists, setPlaylists] = useState<PlaylistType[]>([]);
 
   useEffect(() => {
-    getPlaylists();
+    updatePlaylistData();
   }, []);
 
-  function getPlaylists () {
-    fetch('https://api.spotify.com/v1/users/1131858986/playlists?limit=15&offset=0', {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token,
-      }
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const filteredPlaylists = data.items?.filter((play: PlaylistType) => play.name.includes('My Faves'));
-        setPlaylists(filteredPlaylists);
-      })
+  function updatePlaylistData() {
+    getPlaylists(token).then((result) => setPlaylists(result));
   }
 
   return (
     <StyledDisplayPlaylist>
-      <CreatePlaylist token={token} updatePlaylistData={getPlaylists} />
+      <CreatePlaylist token={token} updatePlaylistData={updatePlaylistData} />
       {
         <List
           grid={{

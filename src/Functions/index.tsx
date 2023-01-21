@@ -6,6 +6,7 @@ import { getPlaylist } from "./getPlaylist";
 import { getTrack } from "./getTrack";
 import { createNewPlaylist } from "./createNewPlaylist";
 import { getYourTracks } from "./getYourTracks";
+import { getPlaylists } from "./getPlaylists";
 
 export {
   addToPlaylist,
@@ -16,4 +17,5 @@ export {
   createNewPlaylist,
   getYourTracks,
   getTopTracks,
+  getPlaylists
 };

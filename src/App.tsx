@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import './App.css';
 import DisplayPlaylists from "./Components/DisplayPlaylists/DisplayPlaylists";
 import { App as AntApp, Col, ConfigProvider, Row } from 'antd';
@@ -17,29 +17,20 @@ function App() {
   const [token, setToken] = useState<string>();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-
-    if (!token && hash) {
-      token = hash?.substring(1).split("&").find(elem => elem.startsWith("access_token"))?.split("=")[1] || '';
-      window.location.hash = ""
-      window.localStorage.setItem("token", token)
-      setToken(token)
-    }
-
-    if (token) {
-      setToken(token);
+    const tokenFromStorage = window.localStorage.getItem("token");
+    if (tokenFromStorage) {
+      setToken(tokenFromStorage);
     } else {
       refreshToken();
     }
-  }, [])
+  }, [token])
 
-  function logout () {
+  const logout = useCallback(() => {
     setToken("");
     window.localStorage.removeItem("token");
-  }
+  }, [token]);
 
-  async function refreshToken() {
+  const refreshToken = useCallback(async () => {
     const r = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST',
       body: new URLSearchParams({
@@ -54,7 +45,7 @@ function App() {
     });
     window.localStorage.setItem("token", r.access_token)
     setToken(r.access_token);
-  }
+  }, [token]);
 
   return (
     <div className="App">

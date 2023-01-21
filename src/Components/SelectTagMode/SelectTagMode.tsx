@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useCallback } from 'react';
 import { Avatar, Select, Tag } from 'antd';
 import { StyledSelectTagMode } from './StyledSelectTagMode';
 import type { CustomTagProps } from 'rc-select/lib/BaseSelect';
@@ -14,18 +14,19 @@ export interface SelectOptionType {
 
 interface Props {
   options?: SelectOptionType[];
-  values?: string[] | SelectOptionType[];
+  values?: string[];
   defaultValue?: string;
-  handleChange: any;
+  handleChange: Dispatch<SetStateAction<string[]>>;
 }
 
-const tagRender = (props: CustomTagProps, options: SelectOptionType[]) => {
+const TagRender = (props: CustomTagProps, options: SelectOptionType[]) => {
   const { label, value, closable, onClose } = props;
   const option = options.find((gen) => gen.value === value);
-  function onPreventMouseDown (event: React.MouseEvent<HTMLSpanElement>) {
+  
+  const onPreventMouseDown = useCallback((event: React.MouseEvent<HTMLSpanElement>) => { 
     event.preventDefault();
     event.stopPropagation();
-  }
+  }, []);
 
   return (
     <Tag
@@ -52,7 +53,7 @@ export const SelectTagMode = ({ options = [], handleChange, values }: Props) => 
   return (
     <StyledSelectTagMode>
       <Select
-        tagRender={props => tagRender(props, options)}
+        tagRender={props => TagRender(props, options)}
         size="large"
         style={{ width: '100%'}}
         listHeight={360}
@@ -64,11 +65,6 @@ export const SelectTagMode = ({ options = [], handleChange, values }: Props) => 
         filterOption={(input, option) => (option?.label ?? '').toString().includes(input)}
         onChange={handleChange}
         value={values}
-        dropdownRender={(menu) => (
-          <div>
-            {menu}
-          </div>
-        )}
       >
         {options.map((opt) => {
           return (
@@ -85,6 +81,6 @@ export const SelectTagMode = ({ options = [], handleChange, values }: Props) => 
   )
 }
 
-tagRender.propTypes = {
+TagRender.propTypes = {
   label: PropTypes.string
 };

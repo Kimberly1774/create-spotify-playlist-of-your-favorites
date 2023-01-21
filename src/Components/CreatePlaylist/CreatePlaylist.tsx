@@ -33,8 +33,8 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
   const [yourGenres, setYourGenres] = useState<SelectOptionType[]>();
   const [yourTracks, setYourTracks] = useState<SelectOptionType[]>();
   const [artists, setArtists] = useState<SelectOptionType[]>();
-  const [selectedTrack, setSelectedTrack] = useState<SelectOptionType[]>([]);
-  const [selectedArtists, setSelectedArtists] = useState<SelectOptionType[]>([]);
+  const [selectedTrack, setSelectedTrack] = useState<string[]>([]);
+  const [selectedArtists, setSelectedArtists] = useState<string[]>([]);
   const [selectedYourGenre, setSelectedYourGenre] = useState<string[]>([]);
   const [timeRange, setTimeRange] = useState<string>('medium_term');
   const [customTimeRange, setCustomTimeRange] = useState<string>('medium_term');
@@ -51,11 +51,11 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
     });
     await getYourTopArtists(token, customTimeRange).then((artists) => {
       setArtists(artists);
-      setSelectedArtists(artists?.slice(0, 2));
+      setSelectedArtists(artists?.map((artist: SelectOptionType) => artist.value).slice(0, 2));
     });
     await getYourTracks(token, customTimeRange).then((tracks) => {
       setYourTracks(tracks);
-      setSelectedTrack(tracks?.slice(0, 2));
+      setSelectedTrack(tracks?.map((track: SelectOptionType) => track.value).slice(0, 2));
     });
   }
 
@@ -64,20 +64,8 @@ const CreatePlaylist = ({ token, updatePlaylistData }: CreatePlaylistProps) => {
   }, [customTimeRange]);
 
   async function createNewCustomizedPlaylist() {
-    let artistSeed: string;
-    if (selectedArtists[0]?.value) {
-      artistSeed = selectedArtists.map((val) => val.value).join('&');
-    } else {
-      artistSeed = selectedArtists.join('&') || '';
-    }
-
-    let trackSeed: string;
-    if (selectedTrack[0]?.value) {
-      trackSeed = selectedTrack.map((val) => val.value).join('&') || '';
-    } else {
-      trackSeed = selectedTrack.join('&') || '';
-    }
-
+    const artistSeed = selectedArtists.join('&') || '';
+    const trackSeed = selectedTrack.join('&') || '';
     const genreSeed = selectedYourGenre.join('&') || '';
 
     createNewPlaylist(token, newCustomPlaylistLength, customTimeRange, genreSeed, artistSeed, trackSeed).then(playlistId => {
